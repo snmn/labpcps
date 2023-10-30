@@ -66,7 +66,7 @@ class CardsandModules {
                         fontWeight:FontWeight.bold),),
                 ),
                 //text
-                Text(CardsandModules.formatDateTimestring(article.publishedAt!)
+                Text(formatDateTimestring(article.publishedAt!)
                   ,maxLines: 2,overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.white,fontSize: 10,
                       fontWeight:FontWeight.normal),)
@@ -78,5 +78,4 @@ class CardsandModules {
       ),
     );
   }
-
 }

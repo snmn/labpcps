@@ -1,5 +1,6 @@
 import 'package:demo/pages/auth/logindemo.dart';
 import 'package:demo/pages/auth/loginpage.dart';
+import 'package:demo/pages/news/newsui.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/news/newsuii.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: NewsUII(),
+      home: NewsUI(),
     );
   }
 }
