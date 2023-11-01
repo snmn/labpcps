@@ -180,20 +180,22 @@ class NewsUIIState extends State<NewsUII>{
   }
   void _onRefresh() async{
     // monitor network fetch
+
+    await Future.delayed(Duration(milliseconds: 50));
+    // if failed,use refreshFailed()
     setState(() {
       apicallv();
       apicallh();
     });
-    await Future.delayed(Duration(milliseconds: 50));
-    // if failed,use refreshFailed()
-
     _refreshController.refreshCompleted();
   }
 
   void _onLoading() async{
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
+    setState(() {
 
+    });
     _refreshController.loadComplete();
   }
 
