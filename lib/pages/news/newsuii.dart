@@ -181,7 +181,7 @@ class NewsUIIState extends State<NewsUII>{
   void _onRefresh() async{
     // monitor network fetch
 
-    await Future.delayed(Duration(milliseconds: 50));
+    await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     setState(() {
       apicallv();
