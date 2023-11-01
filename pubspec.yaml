@@ -39,6 +39,9 @@ dependencies:
   shared_preferences:
   http:
   intl:
+  connectivity_plus:
+  pull_to_refresh:
+
 
 dev_dependencies:
   flutter_test:
