@@ -37,7 +37,7 @@ class NewsUIIState extends State<NewsUII>{
             NewsDetail(article)));
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         child: Stack(
           children: [
             Container(
@@ -59,16 +59,16 @@ class NewsUIIState extends State<NewsUII>{
                 width: size.width/1.9,
                 child: Text(article.title!.toUpperCase()
                   ,maxLines: 2,overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.white,fontSize: 16,
+                  style: const TextStyle(color: Colors.white,fontSize: 16,
                       fontWeight:FontWeight.bold),),
               ),
             ),
             Positioned(
               left: 20,bottom: 5,
-              child: Text(CardsandModules.formatDateTimestring(article.publishedAt!),style: TextStyle(color: Colors.white,
+              child: Text(CardsandModules.formatDateTimestring(article.publishedAt!),style: const TextStyle(color: Colors.white,
                 fontSize: 14,fontWeight: FontWeight.normal,),),
             ),
-            Positioned(bottom: 5,right: 15,child: Icon(Icons.play_circle,color: Colors.white,size: 25,))
+            const Positioned(bottom: 5,right: 15,child: Icon(Icons.play_circle,color: Colors.white,size: 25,))
           ],
         ),
       ),
@@ -98,7 +98,7 @@ class NewsUIIState extends State<NewsUII>{
               width:80,
               child: Text(article.title!.toUpperCase()
                 ,maxLines: 2,overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.black,fontSize: 12,
+                style: const TextStyle(color: Colors.black,fontSize: 12,
                     fontWeight:FontWeight.bold),),
             ),
             //author
@@ -106,7 +106,7 @@ class NewsUIIState extends State<NewsUII>{
               width:80,
               child: Text(article.author!
                 ,maxLines: 2,overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.black,fontSize: 12,
+                style: const TextStyle(color: Colors.black,fontSize: 12,
                     fontWeight:FontWeight.bold),),
             ),
             //date
@@ -115,7 +115,7 @@ class NewsUIIState extends State<NewsUII>{
               child: Text(
                 CardsandModules.formatDateTimestring(article.publishedAt!)
                 ,maxLines: 2,overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.black,fontSize: 12,
+                style: const TextStyle(color: Colors.black,fontSize: 12,
                     fontWeight:FontWeight.bold),),
             ),
           ],
@@ -180,8 +180,7 @@ class NewsUIIState extends State<NewsUII>{
   }
   void _onRefresh() async{
     // monitor network fetch
-
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     setState(() {
       apicallv();
@@ -192,7 +191,7 @@ class NewsUIIState extends State<NewsUII>{
 
   void _onLoading() async{
     // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     setState(() {
 
     });
@@ -229,14 +228,14 @@ class NewsUIIState extends State<NewsUII>{
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: CircularProgressIndicator(),
+                        child: const CircularProgressIndicator(),
                       ),
                     );//
                   case ConnectionState.done:
                     if(snapshot.data==null || snapshot.data!.articles!.isEmpty){
                       return Center(
                         child: Container(
-                          child: Text("No Data or api issue"),
+                          child: const Text("No Data or api issue"),
                         ),
                       );
                     }else{
@@ -284,14 +283,14 @@ class NewsUIIState extends State<NewsUII>{
                           child: Container(
                             height: 50,
                             width: 50,
-                            child: CircularProgressIndicator(),
+                            child: const CircularProgressIndicator(),
                           ),
                         );//
                       case ConnectionState.done:
                         if(snapshot.data==null || snapshot.data!.articles!.isEmpty){
                           return Center(
                             child: Container(
-                              child: Text("No Data or api issue"),
+                              child: const Text("No Data or api issue"),
                             ),
                           );
                         }else{
@@ -345,6 +344,43 @@ class NewsUIIState extends State<NewsUII>{
             ],
           ),
         ),
+        endDrawer: Drawer(
+          child: ListView(
+            children: const [
+              Text("Settings"),
+              Text("Profile"),
+              Text("Cart"),
+              Text("Logout"),
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: const [
+              Text("Settings"),
+              Text("Profile"),
+              Text("Cart"),
+              Text("Logout"),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.call),
+              label: 'Calls',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.camera),
+              label: 'Camera',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Chats',
+            ),
+          ],
+        ),
+
       ),
     );
   }
