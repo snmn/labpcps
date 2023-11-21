@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types
 
+import 'package:demo/static.dart';
+
 class Newsapi {
   String? status;
   int? totalResults;
@@ -35,7 +37,7 @@ class Articles {
   String? title;
   String? description;
   String? url;
-  String? urlToImage;
+  String? urlToImage = StaticValue.defaultimgurl;
   String? publishedAt;
   String? content;
 
@@ -56,7 +58,7 @@ class Articles {
     title = json['title'];
     description = json['description'];
     url = json['url'];
-    urlToImage = json['urlToImage'];
+    urlToImage = json['urlToImage']==null?StaticValue.defaultimgurl:json['urlToImage'];
     publishedAt = json['publishedAt'];
     content = json['content'];
   }

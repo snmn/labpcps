@@ -1,9 +1,7 @@
-import 'package:demo/pages/auth/logindemo.dart';
-import 'package:demo/pages/auth/loginpage.dart';
-import 'package:demo/pages/news/newsui.dart';
+import 'package:demo/pages/maps/mappage.dart';
+import 'package:demo/route.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/news/newsuii.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,12 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter Demo Lab',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
       ),
-      home: NewsUI(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGen.generateRoute,
     );
   }
 }

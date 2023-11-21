@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:demo/api/getapi.dart';
 import 'package:demo/modules/cardsandmodules.dart';
 import 'package:demo/modules/dialogboxes.dart';
+import 'package:demo/static.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +55,7 @@ class NewsUIState extends State<NewsUI> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
-              article.urlToImage!,
+              article.urlToImage != null ?article.urlToImage!: StaticValue.defaultimgurl,
               fit: BoxFit.cover,
             ),
           ),
@@ -65,7 +66,7 @@ class NewsUIState extends State<NewsUI> {
           child: Container(
               width: size.width / 1.7,
               child: Text(
-                article.title!,
+                article.title!=null ? article.title!: "NA",
                 maxLines: 2,
                 style: TextStyle(
                     color: Colors.white,
@@ -77,7 +78,7 @@ class NewsUIState extends State<NewsUI> {
           bottom: 10,
           left: 15,
           child: Text(
-            CardsandModules.formatDateTimestring(article.publishedAt!),
+            article.publishedAt ==null? "NA" :CardsandModules.formatDateTimestring(article.publishedAt!),
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -208,7 +209,7 @@ class NewsUIState extends State<NewsUI> {
 
     }
   }
-
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -217,10 +218,35 @@ class NewsUIState extends State<NewsUI> {
       onRefresh: _onRefresh,
       onLoading: _onLoading,
       child: Scaffold(
+        key: _key,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
+              SizedBox(height: 60,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _key.currentState!.openDrawer(); //<-- SEE HERE
+                    },
+                    child: const Text(
+                      'Elevated Button 1',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _key.currentState!.openEndDrawer(); //<-- SEE HERE
+                    },
+                    child: const Text(
+                      'Elevated Button 2',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
+                ],
+              ),
               // horizontal list
               //stack // image // text // date // icon
               //futurebuilder horizontal list
@@ -338,6 +364,52 @@ class NewsUIState extends State<NewsUI> {
               // row // container // text  /// date
             ],
           ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: const [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Drawer Header'),
+              ),
+
+            ],
+          ),
+        ),
+        endDrawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: const [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Drawer Header'),
+              ),
+
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.call),
+              label: 'Calls',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.camera),
+              label: 'Camera',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Chats',
+            ),
+          ],
         ),
       ),
     );
